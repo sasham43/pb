@@ -32,29 +32,29 @@ struct scoreView: View {
                         }
                         if(serve == 0){
                             Circle()
-                                .fill(.white)
-                                .stroke(.white, lineWidth: 1)
+                                .fill(.black)
+                                .stroke(.black, lineWidth: 1)
 //                                .border(.white, width: )
                                 .frame(width: 10, height: 10)
                             Circle()
                                 .fill(.clear)
-                                .stroke(.white, lineWidth: 1)
+                                .stroke(.black, lineWidth: 1)
                                 .frame(width: 10, height: 10)
                         } else if(serve == 1){
                             Circle()
-                                .fill(.white)
+                                .fill(.black)
                                 .frame(width: 10, height: 10)
                             Circle()
-                                .fill(.white)
+                                .fill(.black)
                                 .frame(width: 10, height: 10)
                         } else {
                             Circle()
-                                .stroke(.white, lineWidth: 1)
+                                .stroke(.black, lineWidth: 1)
                                 .fill(.clear)
                                 .frame(width: 10, height: 10)
                             
                             Circle()
-                                .stroke(.white, lineWidth: 1)
+                                .stroke(.black, lineWidth: 1)
                                 .fill(.clear)
                                 .frame(width: 10, height: 10)
                         }
@@ -88,29 +88,29 @@ struct scoreView: View {
                         }
                         if(serve == 2){
                             Circle()
-                                .fill(.white)
-                                .stroke(.white, lineWidth: 1)
+                                .fill(.black)
+                                .stroke(.black, lineWidth: 1)
 //                                .border(.white, width: )
                                 .frame(width: 10, height: 10)
                             Circle()
                                 .fill(.clear)
-                                .stroke(.white, lineWidth: 1)
+                                .stroke(.black, lineWidth: 1)
                                 .frame(width: 10, height: 10)
                         } else if (serve == 3){
                             Circle()
-                                .fill(.white)
+                                .fill(.black)
                                 .frame(width: 10, height: 10)
                             Circle()
-                                .fill(.white)
+                                .fill(.black)
                                 .frame(width: 10, height: 10)
                         } else {
                             Circle()
-                                .stroke(.white, lineWidth: 1)
+                                .stroke(.black, lineWidth: 1)
                                 .fill(.clear)
                                 .frame(width: 10, height: 10)
                             
                             Circle()
-                                .stroke(.white, lineWidth: 1)
+                                .stroke(.black, lineWidth: 1)
                                 .fill(.clear)
                                 .frame(width: 10, height: 10)
                         }
