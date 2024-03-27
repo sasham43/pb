@@ -15,6 +15,7 @@
 		415217262BB4B12200E42E16 /* pbTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415217252BB4B12200E42E16 /* pbTests.swift */; };
 		415217302BB4B12200E42E16 /* pbUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4152172F2BB4B12200E42E16 /* pbUITests.swift */; };
 		415217322BB4B12200E42E16 /* pbUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415217312BB4B12200E42E16 /* pbUITestsLaunchTests.swift */; };
+		4152173F2BB4B18E00E42E16 /* scoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4152173E2BB4B18E00E42E16 /* scoreView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		4152172B2BB4B12200E42E16 /* pbUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = pbUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4152172F2BB4B12200E42E16 /* pbUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pbUITests.swift; sourceTree = "<group>"; };
 		415217312BB4B12200E42E16 /* pbUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pbUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		4152173E2BB4B18E00E42E16 /* scoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = scoreView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				415217112BB4B11F00E42E16 /* pbApp.swift */,
+				4152173E2BB4B18E00E42E16 /* scoreView.swift */,
 				415217132BB4B11F00E42E16 /* ContentView.swift */,
 				415217152BB4B11F00E42E16 /* Item.swift */,
 				415217172BB4B12100E42E16 /* Assets.xcassets */,
@@ -263,6 +266,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				415217142BB4B11F00E42E16 /* ContentView.swift in Sources */,
+				4152173F2BB4B18E00E42E16 /* scoreView.swift in Sources */,
 				415217162BB4B11F00E42E16 /* Item.swift in Sources */,
 				415217122BB4B11F00E42E16 /* pbApp.swift in Sources */,
 			);
