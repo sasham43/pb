@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct scoreView: View {
+
     
     @State private var homeScore : Int = 0
     @State private var awayScore = 0
@@ -25,10 +26,14 @@ struct scoreView: View {
                     VStack {
                         Text("Home: \(homeScore)")
                         Button("+") {
+                            
                             homeScore += 1
+                            WatchConnector.shared.sendDataToWatch("Home +")
                         }
                         Button("-") {
-                            homeScore -= 1
+                            if(homeScore != 0){
+                                homeScore -= 1
+                            }
                         }
                         if(serve == 0){
                             Circle()
@@ -84,7 +89,9 @@ struct scoreView: View {
                             awayScore += 1
                         }
                         Button("-") {
-                            awayScore -= 1
+                            if(awayScore != 0){
+                                awayScore -= 1
+                            }
                         }
                         if(serve == 2){
                             Circle()

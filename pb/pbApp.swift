@@ -25,7 +25,8 @@ struct pbApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+//            ContentView()
+            scoreView()
         }
         .modelContainer(sharedModelContainer)
     }
