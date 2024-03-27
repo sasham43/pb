@@ -16,7 +16,17 @@ struct controlsView: View {
         VStack {
             HStack {
                 VStack {
-                    Text("Home")
+                    HStack {
+                        Circle()
+                            .fill(.blue)
+                            .stroke(.blue, lineWidth: 1)
+                            .frame(width: 10, height: 10)
+                        Circle()
+                            .fill(.clear)
+                            .stroke(.blue, lineWidth: 1)
+                            .frame(width: 10, height: 10)
+                    }
+                    Text("Home: 0")
                     Button("+") {
                         print("+")
                         PhoneConnector.shared.sendDataToPhone("+")
@@ -27,7 +37,17 @@ struct controlsView: View {
                     }
                 }
                 VStack {
-                    Text("Away")
+                    HStack {
+                        Circle()
+                            .fill(.clear)
+                            .stroke(.blue, lineWidth: 1)
+                            .frame(width: 10, height: 10)
+                        Circle()
+                            .fill(.clear)
+                            .stroke(.blue, lineWidth: 1)
+                            .frame(width: 10, height: 10)
+                    }
+                    Text("Away: 0")
                     Button("+") {
                         print("+")
                     }
