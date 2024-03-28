@@ -22,7 +22,9 @@ struct scoreView: View {
             GeometryReader { geometry in
                 HStack {
                     VStack {
-                        Text("Home: \(homeScore)")
+                        Text("\(homeScore)")
+                            .font(.system(size: 36))
+                        Text("Home")
                         Button("+") {
                             homeScore += 1
                             WatchConnector.shared.sendDataToWatch("Home +")
@@ -65,7 +67,9 @@ struct scoreView: View {
                     }
                     
                     VStack {
-                        Text("Away: \(awayScore)")
+                        Text("\(awayScore)")
+                            .font(.system(size: 36))
+                        Text("Away")
                         Button("+") {
                             awayScore += 1
                         }
