@@ -15,6 +15,14 @@ struct scoreView: View {
     @State private var serve : Int = 1
     @State private var isGameInProgress : Bool = true
     
+    func resetGame(){
+        homeScore = 0
+        awayScore = 0
+        status = ""
+        serve = 1
+        isGameInProgress = true
+    }
+    
     var body: some View {
         VStack {
             Text("Score")
@@ -51,11 +59,12 @@ struct scoreView: View {
                     
                     VStack {   
                         Button("Reset") {
-                            homeScore = 0
-                            awayScore = 0
-                            status = ""
-                            serve = 1
-                            isGameInProgress = true
+                            resetGame()
+//                            homeScore = 0
+//                            awayScore = 0
+//                            status = ""
+//                            serve = 1
+//                            isGameInProgress = true
                         }
                         Button("Next serve") {
                             if (serve != 3){
