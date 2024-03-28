@@ -12,6 +12,8 @@ struct controlsView: View {
 //    func sendMessage(
     
     
+    
+    
     var body: some View {
         VStack {
             HStack {
@@ -28,8 +30,8 @@ struct controlsView: View {
                     }
                     Text("Home: 0")
                     Button("+") {
-                        print("+")
-                        PhoneConnector.shared.sendDataToPhone("+")
+                        print("watch +")
+                        PhoneConnector.shared.sendDataToPhone(["watch home" : "+"])
                         
                     }
                     Button("-") {

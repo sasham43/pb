@@ -39,26 +39,26 @@ extension WatchConnector: WCSessionDelegate {
             }
         }
         
-        func session(_ session: WCSession, didReceiveUserInfo userInfo: String = "") {
+    func session(_ session: WCSession, didReceiveUserInfo userInfo: [String : Any]) {
             dataReceivedFromWatch(userInfo)
         }
         
         // MARK: use this for testing in simulator
-        func session(_ session: WCSession, didReceiveMessage message: String) {
+    func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
             dataReceivedFromWatch(message)
         }
 }
 
 
 extension WatchConnector {
-    public func sendDataToWatch(_ data: String){
-        session.sendMessage([data : ""], replyHandler: nil)
+    public func sendDataToWatch(_ data: [String : Any]){
+        session.sendMessage(data, replyHandler: nil)
 //        session.sendMessage(data, replyHandler: nil)
     }
 }
 
 extension WatchConnector {
-    public func dataReceivedFromWatch(_ info: String){
+    public func dataReceivedFromWatch(_ info: [String : Any]){
         print("Watch data: \(info)")
     }
 }

@@ -39,12 +39,12 @@ extension PhoneConnector:WCSessionDelegate {
         }
     }
     
-    func session(_ session: WCSession, didReceiveUserInfo userInfo: String = "") {
+    func session(_ session: WCSession, didReceiveUserInfo userInfo: [String : Any]) {
         dataReceivedFromPhone(userInfo)
     }
     
     // MARK: use this for testing in simulator
-    func session(_ session: WCSession, didReceiveMessage message: String) {
+    func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
         dataReceivedFromPhone(message)
     }
     
@@ -54,12 +54,12 @@ extension PhoneConnector:WCSessionDelegate {
 // MARK: - send data to phone
 extension PhoneConnector {
     
-    public func sendDataToPhone(_ info: String) {
+    public func sendDataToPhone(_ info: [String: Any]) {
 //        let dict:[String:Any] = ["data":user.encodeIt()]
         
         //session.transferUserInfo(dict)
         // for testing in simulator we use
-        session.sendMessage([info : ""], replyHandler: nil)
+        session.sendMessage(info, replyHandler: nil)
     }
     
 }
@@ -67,7 +67,7 @@ extension PhoneConnector {
 // MARK: - receive data
 extension PhoneConnector {
     
-    public func dataReceivedFromPhone(_ info:String) {
+    public func dataReceivedFromPhone(_ info:[String : Any]) {
 //        let data:Data = info["data"] as! Data
 //        let user = User.decodeIt(data)
 //        DispatchQueue.main.async {

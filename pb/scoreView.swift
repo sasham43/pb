@@ -35,7 +35,7 @@ struct scoreView: View {
                         Text("Home")
                         Button("+") {
                             homeScore += 1
-                            WatchConnector.shared.sendDataToWatch("Home +")
+                            WatchConnector.shared.sendDataToWatch(["phone home" : "+"])
                         }
                         .disabled(!isGameInProgress)
                         Button("-") {
