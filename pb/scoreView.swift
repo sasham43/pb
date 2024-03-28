@@ -8,15 +8,11 @@
 import SwiftUI
 
 struct scoreView: View {
-
     
     @State private var homeScore : Int = 0
-    @State private var awayScore = 0
-    
-    @State private var status = ""
-    
-    @State private var serve : Int = 0
-    
+    @State private var awayScore : Int = 0
+    @State private var status : String = ""
+    @State private var serve : Int = 1
     @State private var isGameInProgress : Bool = true
     
     var body: some View {
@@ -39,38 +35,14 @@ struct scoreView: View {
                         }
                         .disabled(!isGameInProgress)
                         if(serve == 0){
-//                            Circle()
-//                                .fill(.black)
-//                                .stroke(.black, lineWidth: 1)
-////                                .border(.white, width: )
-//                                .frame(width: 10, height: 10)
                             ServeIndicator(filled: true)
                             ServeIndicator(filled: false)
-//                            Circle()
-//                                .fill(.clear)
-//                                .stroke(.black, lineWidth: 1)
-//                                .frame(width: 10, height: 10)
                         } else if(serve == 1){
                             ServeIndicator(filled: true)
                             ServeIndicator(filled: true)
-//                            Circle()
-//                                .fill(.black)
-//                                .frame(width: 10, height: 10)
-//                            Circle()
-//                                .fill(.black)
-//                                .frame(width: 10, height: 10)
                         } else {
                             ServeIndicator(filled: false)
                             ServeIndicator(filled: false)
-//                            Circle()
-//                                .stroke(.black, lineWidth: 1)
-//                                .fill(.clear)
-//                                .frame(width: 10, height: 10)
-//                            
-//                            Circle()
-//                                .stroke(.black, lineWidth: 1)
-//                                .fill(.clear)
-//                                .frame(width: 10, height: 10)
                         }
                     }
                     .padding(10)
@@ -80,7 +52,7 @@ struct scoreView: View {
                             homeScore = 0
                             awayScore = 0
                             status = ""
-                            serve = 0
+                            serve = 1
                             isGameInProgress = true
                         }
                         Button("Next serve") {
@@ -105,41 +77,14 @@ struct scoreView: View {
                         }
                         .disabled(!isGameInProgress)
                         if(serve == 2){
-                            
                             ServeIndicator(filled: true)
                             ServeIndicator(filled: false)
-//                            Circle()
-//                                .fill(.black)
-//                                .stroke(.black, lineWidth: 1)
-////                                .border(.white, width: )
-//                                .frame(width: 10, height: 10)
-//                            Circle()
-//                                .fill(.clear)
-//                                .stroke(.black, lineWidth: 1)
-//                                .frame(width: 10, height: 10)
                         } else if (serve == 3){
-                            
                             ServeIndicator(filled: true)
                             ServeIndicator(filled: true)
-//                            Circle()
-//                                .fill(.black)
-//                                .frame(width: 10, height: 10)
-//                            Circle()
-//                                .fill(.black)
-//                                .frame(width: 10, height: 10)
                         } else {
-                            
                             ServeIndicator(filled: false)
                             ServeIndicator(filled: false)
-//                            Circle()
-//                                .stroke(.black, lineWidth: 1)
-//                                .fill(.clear)
-//                                .frame(width: 10, height: 10)
-//                            
-//                            Circle()
-//                                .stroke(.black, lineWidth: 1)
-//                                .fill(.clear)
-//                                .frame(width: 10, height: 10)
                         }
                     }
                 }
