@@ -27,6 +27,7 @@
 		415217732BB4BC9C00E42E16 /* controlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415217722BB4BC9C00E42E16 /* controlsView.swift */; };
 		415217752BB4C01C00E42E16 /* WatchConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415217742BB4C01C00E42E16 /* WatchConnector.swift */; };
 		415217772BB4C1FE00E42E16 /* PhoneConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415217762BB4C1FE00E42E16 /* PhoneConnector.swift */; };
+		415217792BB5BA7100E42E16 /* ServeIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415217782BB5BA7100E42E16 /* ServeIndicator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,6 +109,7 @@
 		415217722BB4BC9C00E42E16 /* controlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = controlsView.swift; sourceTree = "<group>"; };
 		415217742BB4C01C00E42E16 /* WatchConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchConnector.swift; sourceTree = "<group>"; };
 		415217762BB4C1FE00E42E16 /* PhoneConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneConnector.swift; sourceTree = "<group>"; };
+		415217782BB5BA7100E42E16 /* ServeIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServeIndicator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -187,6 +189,7 @@
 			children = (
 				415217112BB4B11F00E42E16 /* pbApp.swift */,
 				4152173E2BB4B18E00E42E16 /* scoreView.swift */,
+				415217782BB5BA7100E42E16 /* ServeIndicator.swift */,
 				415217742BB4C01C00E42E16 /* WatchConnector.swift */,
 				415217132BB4B11F00E42E16 /* ContentView.swift */,
 				415217152BB4B11F00E42E16 /* Item.swift */,
@@ -483,6 +486,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				415217142BB4B11F00E42E16 /* ContentView.swift in Sources */,
+				415217792BB5BA7100E42E16 /* ServeIndicator.swift in Sources */,
 				415217752BB4C01C00E42E16 /* WatchConnector.swift in Sources */,
 				4152173F2BB4B18E00E42E16 /* scoreView.swift in Sources */,
 				415217162BB4B11F00E42E16 /* Item.swift in Sources */,

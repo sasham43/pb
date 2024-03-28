@@ -39,38 +39,43 @@ struct scoreView: View {
                         }
                         .disabled(!isGameInProgress)
                         if(serve == 0){
-                            Circle()
-                                .fill(.black)
-                                .stroke(.black, lineWidth: 1)
-//                                .border(.white, width: )
-                                .frame(width: 10, height: 10)
-                            Circle()
-                                .fill(.clear)
-                                .stroke(.black, lineWidth: 1)
-                                .frame(width: 10, height: 10)
+//                            Circle()
+//                                .fill(.black)
+//                                .stroke(.black, lineWidth: 1)
+////                                .border(.white, width: )
+//                                .frame(width: 10, height: 10)
+                            ServeIndicator(filled: true)
+                            ServeIndicator(filled: false)
+//                            Circle()
+//                                .fill(.clear)
+//                                .stroke(.black, lineWidth: 1)
+//                                .frame(width: 10, height: 10)
                         } else if(serve == 1){
-                            Circle()
-                                .fill(.black)
-                                .frame(width: 10, height: 10)
-                            Circle()
-                                .fill(.black)
-                                .frame(width: 10, height: 10)
+                            ServeIndicator(filled: true)
+                            ServeIndicator(filled: true)
+//                            Circle()
+//                                .fill(.black)
+//                                .frame(width: 10, height: 10)
+//                            Circle()
+//                                .fill(.black)
+//                                .frame(width: 10, height: 10)
                         } else {
-                            Circle()
-                                .stroke(.black, lineWidth: 1)
-                                .fill(.clear)
-                                .frame(width: 10, height: 10)
-                            
-                            Circle()
-                                .stroke(.black, lineWidth: 1)
-                                .fill(.clear)
-                                .frame(width: 10, height: 10)
+                            ServeIndicator(filled: false)
+                            ServeIndicator(filled: false)
+//                            Circle()
+//                                .stroke(.black, lineWidth: 1)
+//                                .fill(.clear)
+//                                .frame(width: 10, height: 10)
+//                            
+//                            Circle()
+//                                .stroke(.black, lineWidth: 1)
+//                                .fill(.clear)
+//                                .frame(width: 10, height: 10)
                         }
                     }
                     .padding(10)
                     
-                    VStack {
-                        
+                    VStack {   
                         Button("Reset") {
                             homeScore = 0
                             awayScore = 0
@@ -100,32 +105,41 @@ struct scoreView: View {
                         }
                         .disabled(!isGameInProgress)
                         if(serve == 2){
-                            Circle()
-                                .fill(.black)
-                                .stroke(.black, lineWidth: 1)
-//                                .border(.white, width: )
-                                .frame(width: 10, height: 10)
-                            Circle()
-                                .fill(.clear)
-                                .stroke(.black, lineWidth: 1)
-                                .frame(width: 10, height: 10)
-                        } else if (serve == 3){
-                            Circle()
-                                .fill(.black)
-                                .frame(width: 10, height: 10)
-                            Circle()
-                                .fill(.black)
-                                .frame(width: 10, height: 10)
-                        } else {
-                            Circle()
-                                .stroke(.black, lineWidth: 1)
-                                .fill(.clear)
-                                .frame(width: 10, height: 10)
                             
-                            Circle()
-                                .stroke(.black, lineWidth: 1)
-                                .fill(.clear)
-                                .frame(width: 10, height: 10)
+                            ServeIndicator(filled: true)
+                            ServeIndicator(filled: false)
+//                            Circle()
+//                                .fill(.black)
+//                                .stroke(.black, lineWidth: 1)
+////                                .border(.white, width: )
+//                                .frame(width: 10, height: 10)
+//                            Circle()
+//                                .fill(.clear)
+//                                .stroke(.black, lineWidth: 1)
+//                                .frame(width: 10, height: 10)
+                        } else if (serve == 3){
+                            
+                            ServeIndicator(filled: true)
+                            ServeIndicator(filled: true)
+//                            Circle()
+//                                .fill(.black)
+//                                .frame(width: 10, height: 10)
+//                            Circle()
+//                                .fill(.black)
+//                                .frame(width: 10, height: 10)
+                        } else {
+                            
+                            ServeIndicator(filled: false)
+                            ServeIndicator(filled: false)
+//                            Circle()
+//                                .stroke(.black, lineWidth: 1)
+//                                .fill(.clear)
+//                                .frame(width: 10, height: 10)
+//                            
+//                            Circle()
+//                                .stroke(.black, lineWidth: 1)
+//                                .fill(.clear)
+//                                .frame(width: 10, height: 10)
                         }
                     }
                 }
