@@ -17,6 +17,8 @@ struct scoreView: View {
     
     @State private var serve : Int = 0
     
+    @State private var isGameInProgress : Bool = true
+    
     var body: some View {
         VStack {
             Text("Score")
@@ -26,15 +28,16 @@ struct scoreView: View {
                     VStack {
                         Text("Home: \(homeScore)")
                         Button("+") {
-                            
                             homeScore += 1
                             WatchConnector.shared.sendDataToWatch("Home +")
                         }
+                        .disabled(!isGameInProgress)
                         Button("-") {
                             if(homeScore != 0){
                                 homeScore -= 1
                             }
                         }
+                        .disabled(!isGameInProgress)
                         if(serve == 0){
                             Circle()
                                 .fill(.black)
@@ -73,6 +76,7 @@ struct scoreView: View {
                             awayScore = 0
                             status = ""
                             serve = 0
+                            isGameInProgress = true
                         }
                         Button("Next serve") {
                             if (serve != 3){
@@ -88,11 +92,13 @@ struct scoreView: View {
                         Button("+") {
                             awayScore += 1
                         }
+                        .disabled(!isGameInProgress)
                         Button("-") {
                             if(awayScore != 0){
                                 awayScore -= 1
                             }
                         }
+                        .disabled(!isGameInProgress)
                         if(serve == 2){
                             Circle()
                                 .fill(.black)
@@ -129,12 +135,14 @@ struct scoreView: View {
                 if(homeScore >= 11 && homeScore - awayScore >= 2) {
                     print("Home wins")
                     status = "Home wins"
+                    isGameInProgress = false
                 }
             }
             .onChange(of: awayScore) {
                 if(awayScore >= 11 && awayScore - homeScore >= 2) {
                     print("Away wins")
                     status = "Away wins"
+                    isGameInProgress = false
                 }
             }
             Spacer()
