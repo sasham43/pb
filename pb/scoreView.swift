@@ -160,8 +160,9 @@ struct scoreView: View {
                         Text("Pickle Score")
                             .font(.system(size: 22))
                             .padding(4)
-                        Text("\(pickleScore)")
-                            .font(.system(size: 42))
+//                        Text("\(pickleScore)")
+//                            .font(.system(size: 42))
+                        PickleScore()
                     }
                     
                     Spacer()
@@ -297,6 +298,69 @@ struct ScoreButtons: View {
             .disabled(!isGameInProgress)
             .background(side == "home" ? homeColor : awayColor)
         }
+    }
+}
+
+struct PickleScore: View {
+//    @State var pickleScore: String
+    @EnvironmentObject var scoreData: ScoreData
+    
+    let homeColor = Color(red: 41 / 255, green: 77 / 255, blue: 74 / 255)
+    let awayColor = Color(red: 100 / 255, green: 49 / 255, blue: 97 / 255)
+    let yellowColor = Color(red: 255 / 255, green: 191 / 255, blue: 70 / 255)
+    
+    var homeScoreText: AttributedString {
+        var text = AttributedString(" \(scoreData.homeScore) ")
+        text.backgroundColor = homeColor
+        text.foregroundColor = .white
+        return text
+    }
+    var awayScoreText: AttributedString {
+        var text = AttributedString(" \(scoreData.awayScore) ")
+        text.backgroundColor = awayColor
+        text.foregroundColor = .white
+        return text
+    }
+    var serveText: AttributedString {
+        var serveNumber = 1
+        
+        
+        if(scoreData.serve == 0 || scoreData.serve == 2){
+            serveNumber = 1
+        } else if (scoreData.serve == 1 || scoreData.serve == 3){
+            serveNumber = 2
+        }
+        
+        var text = AttributedString(" \(serveNumber) ")
+        text.backgroundColor = yellowColor
+        text.foregroundColor = .black
+        
+        return text
+    }
+    
+//    func updatePickleScore(){
+//        if(isFirstServe == true){
+//            pickleScore = "\(scoreData.homeScore)-\(scoreData.awayScore)-Start"
+//        } else if(scoreData.serve < 2){
+//            // home serving
+//            let serveNum = scoreData.serve +  1
+//            pickleScore = "\(scoreData.homeScore)-\(scoreData.awayScore)-\(serveNum)"
+//        } else {
+//            // away serving
+//            let serveNum = scoreData.serve == 2 ? 1 : 2
+//            pickleScore = "\(scoreData.awayScore)-\(scoreData.homeScore)-\(serveNum)"
+//        }
+//    }
+    
+    var body: some View {
+        if(scoreData.serve == 0 || scoreData.serve == 1){
+            Text("\(homeScoreText)-\(awayScoreText)-\(serveText)")
+                .font(.system(size: 42))
+        } else if (scoreData.serve == 2 || scoreData.serve == 3) {
+            Text("\(awayScoreText)-\(homeScoreText)-\(serveText)")
+                .font(.system(size: 42))
+        }
+        
     }
 }
 
