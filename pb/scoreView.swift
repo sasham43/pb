@@ -94,8 +94,9 @@ struct scoreView: View {
     
     var body: some View {
         VStack {
-            Text("Score")
+//            Text("Score")
             Text("\(status)")
+                .frame(height: 50)
                 .confettiCannon(counter: $showConfetti, num: 100, openingAngle: Angle.degrees(180), closingAngle: Angle.degrees(0))
             GeometryReader { geometry in
                 VStack {
