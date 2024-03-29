@@ -84,32 +84,57 @@ struct scoreView: View {
                 VStack {
                     // Scores
                     HStack(spacing: 50) {
-                        VStack {
-                            Score(side: "Home", score: $scoreData.homeScore)
-                            ScoreButtons(side: "home", isGameInProgress: $isGameInProgress)
-                                .environmentObject(scoreData)
+//                        VStack {
+                            HStack {
+                                Spacer()
+                                VStack {
+                                    ScoreButtons(side: "home", isGameInProgress: $isGameInProgress)
+                                        .environmentObject(scoreData)
 
-                            HomeServeIndicators(serve: $scoreData.serve)
-                        }
+//                                    HomeServeIndicators(serve: $scoreData.serve)
+                                }
+                                Spacer()
+                                VStack {
+                                    Score(side: "Home", score: $scoreData.homeScore)
+                                }
+                            }
+//                        }
                         
-                        VStack {
-                            Score(side: "Away", score: $scoreData.awayScore)
-                            ScoreButtons(side: "away", isGameInProgress: $isGameInProgress)
-                                .environmentObject(scoreData)
+//                        VStack {
+                            HStack {
+                                VStack {
+                                    Score(side: "Away", score: $scoreData.awayScore)
+                                }
+                                Spacer()
+                                VStack {
+                                    ScoreButtons(side: "away", isGameInProgress: $isGameInProgress)
+                                        .environmentObject(scoreData)
 
-                            AwayServeIndicators(serve: $scoreData.serve)
-                        }
+//                                    AwayServeIndicators(serve: $scoreData.serve)
+                                }
+                                Spacer()
+                            }
+//                        }
                     }
                     .frame(minWidth: geometry.size.width)
                     
                     Spacer()
                     
                     // Serve button
-                    VStack {
-                        Button("Next serve") {
-                            handleServe()
+                    HStack {
+                        Spacer()
+                        HomeServeIndicators(serve: $scoreData.serve)
+                        Spacer()
+                        VStack {
+                            Button("Next serve") {
+                                handleServe()
+                            }
                         }
+                        Spacer()
+                        AwayServeIndicators(serve: $scoreData.serve)
+                        Spacer()
                     }
+                    
                     
                     Spacer()
                     
