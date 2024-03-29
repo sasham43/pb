@@ -82,6 +82,7 @@ struct scoreView: View {
                 .confettiCannon(counter: $showConfetti, num: 100, openingAngle: Angle.degrees(180), closingAngle: Angle.degrees(0))
             GeometryReader { geometry in
                 VStack {
+                    // Scores
                     HStack(spacing: 50) {
                         VStack {
                             Score(side: "Home", score: $scoreData.homeScore)
@@ -100,8 +101,10 @@ struct scoreView: View {
                         }
                     }
                     .frame(minWidth: geometry.size.width)
+                    
                     Spacer()
                     
+                    // Serve button
                     VStack {
                         Button("Next serve") {
                             handleServe()
@@ -109,7 +112,6 @@ struct scoreView: View {
                     }
                     
                     Spacer()
-                    
                     
                     // Pickle score
                     VStack {
@@ -122,6 +124,7 @@ struct scoreView: View {
                     
                     Spacer()
                     
+                    // Reset button
                     VStack {
                         Button("Reset") {
                             isShowingAlert = true
