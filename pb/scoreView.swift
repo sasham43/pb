@@ -130,6 +130,11 @@ struct scoreView: View {
             Spacer()
         }
         
+        .onAppear {
+            print("A wild phone appeared!")
+            // TODO: Figure out the correct way to initialize these connectors
+            WatchConnector.shared.sendDataToWatch(["Handshake" : ""])
+        }
     }
 }
 

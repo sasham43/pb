@@ -81,8 +81,12 @@ struct controlsView: View {
                 }
             }
         }
-       
+        .onAppear {
+            print("A wild watch appeared!")
+            PhoneConnector.shared.sendDataToPhone(["Handshake" : ""])
+        }
     }
+        
 }
 
 #Preview {
