@@ -14,6 +14,7 @@ struct scoreView: View {
     @State private var status : String = ""
     @State private var serve : Int = 1
     @State private var isGameInProgress : Bool = true
+    @State private var isShowingAlert : Bool = false
     
     func resetGame(){
         homeScore = 0
@@ -91,7 +92,14 @@ struct scoreView: View {
                     Spacer()
                     VStack {
                         Button("Reset") {
-                            resetGame()
+//                            resetGame()
+                            isShowingAlert = true
+                        }
+                        .alert("Are you sure you want to reset the game?", isPresented: $isShowingAlert){
+                            Button("Yes"){
+                                resetGame()
+                            }
+                            Button("No", role: .cancel){}
                         }
                         Button("Next serve") {
                             if (serve != 3){
