@@ -73,24 +73,6 @@ struct scoreView: View {
         }
     }
     
-    func handleScore(action: String, side: String){
-        // elegance personified
-        if(action == "+" && side == "home"){
-            scoreData.homeScore += 1
-        } else if (action == "+" && side == "away"){
-            scoreData.awayScore += 1
-        } else if (action == "-" && side == "home"){
-            if(scoreData.homeScore != 0){
-                scoreData.homeScore -= 1
-            }
-        } else if (action == "-" && side == "away"){
-            if(scoreData.awayScore != 0){
-                scoreData.awayScore -= 1
-            }
-        }
-        WatchConnector.shared.sendDataToWatch(["home" : scoreData.homeScore])
-        WatchConnector.shared.sendDataToWatch(["away" : scoreData.awayScore])
-    }
     
     var body: some View {
         VStack {
@@ -103,32 +85,16 @@ struct scoreView: View {
                     HStack(spacing: 50) {
                         VStack {
                             Score(side: "Home", score: $scoreData.homeScore)
-                            Button("+") {
-                                handleScore(action: "+", side: "home")
-                            }
-                            .font(.system(size: 50))
-                            .disabled(!isGameInProgress)
-                            Button("-") {
-                                handleScore(action: "-", side: "home")
-                            }
-                            .font(.system(size: 50))
-                            .disabled(!isGameInProgress)
+                            ScoreButtons(side: "home", isGameInProgress: $isGameInProgress)
+                                .environmentObject(scoreData)
 
                             HomeServeIndicators(serve: $scoreData.serve)
                         }
                         
                         VStack {
                             Score(side: "Away", score: $scoreData.awayScore)
-                            Button("+") {
-                                handleScore(action: "+", side: "away")
-                            }
-                            .font(.system(size: 50))
-                            .disabled(!isGameInProgress)
-                            Button("-") {
-                                    handleScore(action: "-", side: "away")
-                            }
-                            .font(.system(size: 50))
-                            .disabled(!isGameInProgress)
+                            ScoreButtons(side: "away", isGameInProgress: $isGameInProgress)
+                                .environmentObject(scoreData)
 
                             AwayServeIndicators(serve: $scoreData.serve)
                         }
@@ -158,7 +124,6 @@ struct scoreView: View {
                     
                     VStack {
                         Button("Reset") {
-//                            resetGame()
                             isShowingAlert = true
                         }
                         .alert("Are you sure you want to reset the game?", isPresented: $isShowingAlert){
@@ -167,7 +132,6 @@ struct scoreView: View {
                             }
                             Button("No", role: .cancel){}
                         }
-//                        .padding(20)
                     }
                     Spacer()
                 }
@@ -231,6 +195,45 @@ struct Score: View {
         Text("\(score)")
             .font(.system(size: 70))
         Text("\(side)")
+    }
+}
+
+struct ScoreButtons: View {
+    @State var side: String
+    @Binding var isGameInProgress: Bool
+    @EnvironmentObject var scoreData: ScoreData
+    
+    
+    func handleScore(action: String, side: String){
+        // elegance personified
+        if(action == "+" && side == "home"){
+            scoreData.homeScore += 1
+        } else if (action == "+" && side == "away"){
+            scoreData.awayScore += 1
+        } else if (action == "-" && side == "home"){
+            if(scoreData.homeScore != 0){
+                scoreData.homeScore -= 1
+            }
+        } else if (action == "-" && side == "away"){
+            if(scoreData.awayScore != 0){
+                scoreData.awayScore -= 1
+            }
+        }
+        WatchConnector.shared.sendDataToWatch(["home" : scoreData.homeScore])
+        WatchConnector.shared.sendDataToWatch(["away" : scoreData.awayScore])
+    }
+    
+    var body: some View {
+        Button("+") {
+            handleScore(action: "+", side: side)
+        }
+        .font(.system(size: 50))
+        .disabled(!isGameInProgress)
+        Button("-") {
+                handleScore(action: "-", side: side)
+        }
+        .font(.system(size: 50))
+        .disabled(!isGameInProgress)
     }
 }
 
