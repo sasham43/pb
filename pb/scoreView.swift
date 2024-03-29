@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+import ConfettiSwiftUI
+
 struct scoreView: View {
     
     @EnvironmentObject var scoreData : ScoreData
@@ -16,6 +18,8 @@ struct scoreView: View {
     @State private var isShowingAlert: Bool = false
     @State private var pickleScore: String = "0-0-2"
     @State private var isFirstServe: Bool = true
+    
+    @State private var showConfetti = 0
     
     func resetGame(){
         scoreData.homeScore = 0
@@ -45,11 +49,13 @@ struct scoreView: View {
             print("Home wins")
             status = "Home wins"
             isGameInProgress = false
+            showConfetti += 1
         }
         if(scoreData.awayScore >= 11 && scoreData.awayScore - scoreData.homeScore >= 2) {
             print("Away wins")
             status = "Away wins"
             isGameInProgress = false
+            showConfetti += 1
         }
 //        print("game checked")
     }
@@ -90,6 +96,7 @@ struct scoreView: View {
         VStack {
             Text("Score")
             Text("\(status)")
+                .confettiCannon(counter: $showConfetti, num: 100, openingAngle: Angle.degrees(180), closingAngle: Angle.degrees(0))
             GeometryReader { geometry in
                 VStack {
                     HStack(spacing: 50) {
