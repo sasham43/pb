@@ -14,6 +14,7 @@ class ScoreData: ObservableObject {
     
     @Published var homeScore: Int = 0
     @Published var awayScore: Int = 0
+    @Published var serve: Int = 1
 }
 
 @main

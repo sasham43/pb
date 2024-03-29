@@ -17,7 +17,7 @@ struct controlsView: View {
     @EnvironmentObject var scoreData : ScoreData
 //    @State private var awayScore : Int = 0
 //    @State private var status : String = ""
-    @State private var serve : Int = 1
+//    @State private var serve : Int = 1
     @State private var isGameInProgress : Bool = true
     
     @State private var isShowingAlert : Bool = false
@@ -28,47 +28,68 @@ struct controlsView: View {
             HStack {
                 VStack {
                     HStack {
-                        Circle()
-                            .fill(.blue)
-                            .stroke(.blue, lineWidth: 1)
-                            .frame(width: 10, height: 10)
-                        Circle()
-                            .fill(.clear)
-                            .stroke(.blue, lineWidth: 1)
-                            .frame(width: 10, height: 10)
+//                        Circle()
+//                            .fill(.blue)
+//                            .stroke(.blue, lineWidth: 1)
+//                            .frame(width: 10, height: 10)
+//                        Circle()
+//                            .fill(.clear)
+//                            .stroke(.blue, lineWidth: 1)
+//                            .frame(width: 10, height: 10)
+                        if(scoreData.serve == 0){
+                            ServeIndicator(filled: true)
+                            ServeIndicator(filled: false)
+                        } else if(scoreData.serve == 1){
+                            ServeIndicator(filled: true)
+                            ServeIndicator(filled: true)
+                        } else {
+                            ServeIndicator(filled: false)
+                            ServeIndicator(filled: false)
+                        }
                     }
                     Text("Home: \(scoreData.homeScore)")
                     Button("+") {
                         print("watch +")
+                        scoreData.homeScore += 1
                         PhoneConnector.shared.sendDataToPhone(["home" : scoreData.homeScore])
                     }
                     .font(.system(size: 32))
                     Button("-") {
                         print("-")
-                        PhoneConnector.shared.sendDataToPhone(["home" : scoreData.homeScore])
+                        if(scoreData.homeScore != 0){
+                            scoreData.homeScore -= 1
+                            PhoneConnector.shared.sendDataToPhone(["home" : scoreData.homeScore])
+                        }
+                        
                     }
                     .font(.system(size: 32))
                 }
                 VStack {
                     HStack {
-                        Circle()
-                            .fill(.clear)
-                            .stroke(.blue, lineWidth: 1)
-                            .frame(width: 10, height: 10)
-                        Circle()
-                            .fill(.clear)
-                            .stroke(.blue, lineWidth: 1)
-                            .frame(width: 10, height: 10)
+                        if(scoreData.serve == 2){
+                            ServeIndicator(filled: true)
+                            ServeIndicator(filled: false)
+                        } else if (scoreData.serve == 3){
+                            ServeIndicator(filled: true)
+                            ServeIndicator(filled: true)
+                        } else {
+                            ServeIndicator(filled: false)
+                            ServeIndicator(filled: false)
+                        }
                     }
                     Text("Away: \(scoreData.awayScore)")
                     Button("+") {
                         print("+")
+                        scoreData.awayScore += 1
                         PhoneConnector.shared.sendDataToPhone(["away" : scoreData.awayScore])
                     }
                     .font(.system(size: 32))
                     Button("-") {
                         print("-")
-                        PhoneConnector.shared.sendDataToPhone(["away" : scoreData.awayScore])
+                        if(scoreData.awayScore != 0){
+                            scoreData.awayScore -= 1
+                            PhoneConnector.shared.sendDataToPhone(["away" : scoreData.awayScore])
+                        }
                     }
                     .font(.system(size: 32))
                 }
@@ -88,6 +109,12 @@ struct controlsView: View {
                         Button("No", role: .cancel){}
                     }
                     Button("Serve") {
+                        if (scoreData.serve != 3){
+                            scoreData.serve += 1
+                    } else {
+                        scoreData.serve = 0
+                    }
+                        PhoneConnector.shared.sendDataToPhone(["serve": scoreData.serve])
                         print("next serve")
                     }
                 }

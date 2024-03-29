@@ -66,15 +66,19 @@ extension WatchConnector {
             DispatchQueue.main.async {
                 self.scoreData.homeScore = homeScore
             }
-//            scoreData.homeScore = homeScore
             print("home score received: \(homeScore)")
         }
         if let awayScore = info["away"] as? Int {
             DispatchQueue.main.async {
                 self.scoreData.awayScore = awayScore
             }
-//            scoreData.homeScore = homeScore
             print("away score received: \(awayScore)")
+        }
+        if let serve = info["serve"] as? Int {
+            DispatchQueue.main.async {
+                self.scoreData.serve = serve
+            }
+            print("serve received: \(serve)")
         }
     }
 }

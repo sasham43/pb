@@ -73,17 +73,11 @@ extension PhoneConnector {
 extension PhoneConnector {
     
     public func dataReceivedFromPhone(_ info:[String : Any]) {
-//        let data:Data = info["data"] as! Data
-//        let user = User.decodeIt(data)
-//        DispatchQueue.main.async {
-//            self.users.append(user)
-//        }
         print("Received from phone: \(info)")
         if let homeScore = info["home"] as? Int {
             DispatchQueue.main.async {
                 self.scoreData.homeScore = homeScore
             }
-//            scoreData.homeScore = homeScore
             print("home score received: \(homeScore)")
         } else {
             print("could not unpack value")
@@ -92,12 +86,16 @@ extension PhoneConnector {
             DispatchQueue.main.async {
                 self.scoreData.awayScore = awayScore
             }
-//            scoreData.homeScore = homeScore
             print("away score received: \(awayScore)")
         } else {
             print("could not unpack value")
         }
-//        scoreData.homeScore = info["home"] ?? 0
+        if let serve = info["serve"] as? Int {
+            DispatchQueue.main.async {
+                self.scoreData.serve = serve
+            }
+            print("serve received: \(serve)")
+        }
     }
     
 }

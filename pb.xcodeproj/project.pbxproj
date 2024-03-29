@@ -28,6 +28,7 @@
 		415217752BB4C01C00E42E16 /* WatchConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415217742BB4C01C00E42E16 /* WatchConnector.swift */; };
 		415217772BB4C1FE00E42E16 /* PhoneConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415217762BB4C1FE00E42E16 /* PhoneConnector.swift */; };
 		415217792BB5BA7100E42E16 /* ServeIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415217782BB5BA7100E42E16 /* ServeIndicator.swift */; };
+		416379CA2BB729820035146C /* ServeIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416379C92BB729820035146C /* ServeIndicator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -110,6 +111,7 @@
 		415217742BB4C01C00E42E16 /* WatchConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchConnector.swift; sourceTree = "<group>"; };
 		415217762BB4C1FE00E42E16 /* PhoneConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneConnector.swift; sourceTree = "<group>"; };
 		415217782BB5BA7100E42E16 /* ServeIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServeIndicator.swift; sourceTree = "<group>"; };
+		416379C92BB729820035146C /* ServeIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServeIndicator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -230,6 +232,7 @@
 			children = (
 				415217462BB4BB1600E42E16 /* pb_watchApp.swift */,
 				415217482BB4BB1600E42E16 /* ContentView.swift */,
+				416379C92BB729820035146C /* ServeIndicator.swift */,
 				415217762BB4C1FE00E42E16 /* PhoneConnector.swift */,
 				415217722BB4BC9C00E42E16 /* controlsView.swift */,
 				4152174A2BB4BB1900E42E16 /* Assets.xcassets */,
@@ -517,6 +520,7 @@
 			files = (
 				415217772BB4C1FE00E42E16 /* PhoneConnector.swift in Sources */,
 				415217492BB4BB1600E42E16 /* ContentView.swift in Sources */,
+				416379CA2BB729820035146C /* ServeIndicator.swift in Sources */,
 				415217732BB4BC9C00E42E16 /* controlsView.swift in Sources */,
 				415217472BB4BB1600E42E16 /* pb_watchApp.swift in Sources */,
 			);
@@ -860,6 +864,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "pb-watch";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = crump.pb;
+				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -890,6 +895,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "pb-watch";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = crump.pb;
+				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

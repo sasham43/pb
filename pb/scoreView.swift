@@ -13,7 +13,7 @@ struct scoreView: View {
 //    @State private var homeScore : Int = 0
 //    @State private var awayScore : Int = 0
     @State private var status : String = ""
-    @State private var serve : Int = 1
+//    @State private var serve : Int = 1
     @State private var isGameInProgress : Bool = true
     @State private var isShowingAlert : Bool = false
     
@@ -21,7 +21,7 @@ struct scoreView: View {
         scoreData.homeScore = 0
         scoreData.awayScore = 0
         status = ""
-        serve = 1
+        scoreData.serve = 1
         isGameInProgress = true
     }
     
@@ -64,10 +64,10 @@ struct scoreView: View {
                             }
                             .font(.system(size: 50))
                             .disabled(!isGameInProgress)
-                            if(serve == 0){
+                            if(scoreData.serve == 0){
                                 ServeIndicator(filled: true)
                                 ServeIndicator(filled: false)
-                            } else if(serve == 1){
+                            } else if(scoreData.serve == 1){
                                 ServeIndicator(filled: true)
                                 ServeIndicator(filled: true)
                             } else {
@@ -94,10 +94,10 @@ struct scoreView: View {
                             }
                             .font(.system(size: 50))
                             .disabled(!isGameInProgress)
-                            if(serve == 2){
+                            if(scoreData.serve == 2){
                                 ServeIndicator(filled: true)
                                 ServeIndicator(filled: false)
-                            } else if (serve == 3){
+                            } else if (scoreData.serve == 3){
                                 ServeIndicator(filled: true)
                                 ServeIndicator(filled: true)
                             } else {
@@ -119,12 +119,14 @@ struct scoreView: View {
                             }
                             Button("No", role: .cancel){}
                         }
+                        .padding(20)
                         Button("Next serve") {
-                            if (serve != 3){
-                                serve += 1
+                            if (scoreData.serve != 3){
+                                scoreData.serve += 1
                             } else {
-                                serve = 0
+                                scoreData.serve = 0
                             }
+                            WatchConnector.shared.sendDataToWatch(["serve" : scoreData.serve])
                         }
                     }
                     Spacer()
