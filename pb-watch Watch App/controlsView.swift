@@ -11,7 +11,7 @@ struct controlsView: View {
     
 //    func sendMessage(
     
-    
+    @State private var isShowingAlert : Bool = false
     
     
     var body: some View {
@@ -66,7 +66,14 @@ struct controlsView: View {
             VStack {
                 HStack {
                     Button("Reset") {
-                        print("REset")
+                        print("Reset?")
+                        isShowingAlert = true
+                    }
+                    .alert("Are you sure you want to reset the game?", isPresented: $isShowingAlert){
+                        Button("Yes"){
+                            print("Reset!!")
+                        }
+                        Button("No", role: .cancel){}
                     }
                     Button("Serve") {
                         print("next serve")
