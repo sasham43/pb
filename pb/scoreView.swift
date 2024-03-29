@@ -115,16 +115,8 @@ struct scoreView: View {
                             }
                             .font(.system(size: 50))
                             .disabled(!isGameInProgress)
-                            if(scoreData.serve == 0){
-                                ServeIndicator(filled: true)
-                                ServeIndicator(filled: false)
-                            } else if(scoreData.serve == 1){
-                                ServeIndicator(filled: true)
-                                ServeIndicator(filled: true)
-                            } else {
-                                ServeIndicator(filled: false)
-                                ServeIndicator(filled: false)
-                            }
+
+                            HomeServeIndicators(serve: $scoreData.serve)
                         }
                         
                         VStack {
@@ -141,16 +133,8 @@ struct scoreView: View {
                             }
                             .font(.system(size: 50))
                             .disabled(!isGameInProgress)
-                            if(scoreData.serve == 2){
-                                ServeIndicator(filled: true)
-                                ServeIndicator(filled: false)
-                            } else if (scoreData.serve == 3){
-                                ServeIndicator(filled: true)
-                                ServeIndicator(filled: true)
-                            } else {
-                                ServeIndicator(filled: false)
-                                ServeIndicator(filled: false)
-                            }
+
+                            AwayServeIndicators(serve: $scoreData.serve)
                         }
                     }
                     .frame(minWidth: geometry.size.width)
@@ -206,6 +190,39 @@ struct scoreView: View {
             WatchConnector.shared.sendDataToWatch(["Handshake" : ""])
             
             updatePickleScore()
+        }
+    }
+}
+
+struct HomeServeIndicators: View {
+    @Binding var serve: Int
+    
+    var body: some View {
+        if(serve == 0){
+            ServeIndicator(filled: true)
+            ServeIndicator(filled: false)
+        } else if(serve == 1){
+            ServeIndicator(filled: true)
+            ServeIndicator(filled: true)
+        } else {
+            ServeIndicator(filled: false)
+            ServeIndicator(filled: false)
+        }
+    }
+}
+struct AwayServeIndicators: View {
+    @Binding var serve: Int
+    
+    var body: some View {
+        if(serve == 2){
+            ServeIndicator(filled: true)
+            ServeIndicator(filled: false)
+        } else if(serve == 3){
+            ServeIndicator(filled: true)
+            ServeIndicator(filled: true)
+        } else {
+            ServeIndicator(filled: false)
+            ServeIndicator(filled: false)
         }
     }
 }
