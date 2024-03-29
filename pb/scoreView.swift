@@ -81,9 +81,8 @@ struct scoreView: View {
                 scoreData.awayScore -= 1
             }
         }
-//        if(isFirstServe == true){
-//            isFirstServe = false
-//        }
+        WatchConnector.shared.sendDataToWatch(["home" : scoreData.homeScore])
+        WatchConnector.shared.sendDataToWatch(["away" : scoreData.awayScore])
     }
     
     var body: some View {
@@ -98,16 +97,12 @@ struct scoreView: View {
                                 .font(.system(size: 70))
                             Text("Home")
                             Button("+") {
-                                scoreData.homeScore += 1
-                                WatchConnector.shared.sendDataToWatch(["home" : scoreData.homeScore])
+                                handleScore(action: "+", side: "home")
                             }
                             .font(.system(size: 50))
                             .disabled(!isGameInProgress)
                             Button("-") {
-                                if(scoreData.homeScore != 0){
-                                    scoreData.homeScore -= 1
-                                    WatchConnector.shared.sendDataToWatch(["home" : scoreData.homeScore])
-                                }
+                                handleScore(action: "-", side: "home")
                             }
                             .font(.system(size: 50))
                             .disabled(!isGameInProgress)
@@ -128,16 +123,12 @@ struct scoreView: View {
                                 .font(.system(size: 70))
                             Text("Away")
                             Button("+") {
-                                scoreData.awayScore += 1
-                                WatchConnector.shared.sendDataToWatch(["away" : scoreData.awayScore])
+                                handleScore(action: "+", side: "away")
                             }
                             .font(.system(size: 50))
                             .disabled(!isGameInProgress)
                             Button("-") {
-                                if(scoreData.awayScore != 0){
-                                    scoreData.awayScore -= 1
-                                    WatchConnector.shared.sendDataToWatch(["away" : scoreData.awayScore])
-                                }
+                                    handleScore(action: "-", side: "away")
                             }
                             .font(.system(size: 50))
                             .disabled(!isGameInProgress)
