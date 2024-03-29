@@ -21,6 +21,15 @@ struct scoreView: View {
     
     @State private var showConfetti = 0
     
+//    let purpleColor = Color(red: 100 / 250, green: 49 / 250, blue: 97 / 250)
+    let backgroundColor = Color(red: 74 / 255, green: 74 / 255, blue: 74 / 255)
+    let foregroundColor = Color.white
+    let homeColor = Color(red: 41 / 255, green: 77 / 255, blue: 74 / 255)
+    let awayColor = Color(red: 100 / 255, green: 49 / 255, blue: 97 / 255)
+    let redColor = Color(red: 142 / 255, green: 62 / 255, blue: 62 / 255)
+    let yellowColor = Color(red: 255 / 255, green: 191 / 255, blue: 70 / 255)
+    //    let awayColor = Color(red: 142 / 250, green: 62 / 250, blue: 62 / 250)
+    
     func resetGame(){
         scoreData.homeScore = 0
         scoreData.awayScore = 0
@@ -83,7 +92,7 @@ struct scoreView: View {
             GeometryReader { geometry in
                 VStack {
                     // Scores
-                    HStack(spacing: 50) {
+                    HStack(spacing: 5) {
 //                        VStack {
                             HStack {
                                 Spacer()
@@ -99,6 +108,8 @@ struct scoreView: View {
                                 }
                             }
 //                        }
+                        
+                        Text("-")
                         
 //                        VStack {
                             HStack {
@@ -129,11 +140,17 @@ struct scoreView: View {
                             Button("Next serve") {
                                 handleServe()
                             }
+                            .frame(width: 100, height: 50)
+                            .background(yellowColor)
+                            .foregroundColor(.black)
                         }
                         Spacer()
                         AwayServeIndicators(serve: $scoreData.serve)
                         Spacer()
                     }
+                    .frame(height: 50)
+//                    .background(yellowColor)
+//                    .foregroundColor(.black)
                     
                     
                     Spacer()
@@ -154,6 +171,8 @@ struct scoreView: View {
                         Button("Reset") {
                             isShowingAlert = true
                         }
+                        .frame(width: 100, height: 50)
+                        .background(redColor)
                         .alert("Are you sure you want to reset the game?", isPresented: $isShowingAlert){
                             Button("Yes"){
                                 resetGame()
@@ -171,6 +190,9 @@ struct scoreView: View {
             }
             Spacer()
         }
+        .padding(15)
+        .background(backgroundColor)
+        .foregroundColor(foregroundColor)
         
         .onAppear {
             print("A wild phone appeared!")
@@ -222,7 +244,7 @@ struct Score: View {
     var body: some View {
         Text("\(score)")
             .font(.system(size: 70))
-        Text("\(side)")
+//        Text("\(side)")
     }
 }
 
@@ -230,6 +252,12 @@ struct ScoreButtons: View {
     @State var side: String
     @Binding var isGameInProgress: Bool
     @EnvironmentObject var scoreData: ScoreData
+    
+    let homeColor = Color(red: 41 / 250, green: 77 / 250, blue: 74 / 250)
+    let awayColor = Color(red: 100 / 250, green: 49 / 250, blue: 97 / 250) // purple
+//    let awayColor = Color(red: 142 / 250, green: 62 / 250, blue: 62 / 250) // red
+    
+//    let purpleColor = Color(red: 100 / 250, green: 49 / 250, blue: 97 / 250)
     
     
     func handleScore(action: String, side: String){
@@ -252,16 +280,23 @@ struct ScoreButtons: View {
     }
     
     var body: some View {
-        Button("+") {
-            handleScore(action: "+", side: side)
+        VStack(spacing: 5){
+            Button("+") {
+                handleScore(action: "+", side: side)
+            }
+            .frame(width: 100, height: 100)
+            .font(.system(size: 50))
+            .disabled(!isGameInProgress)
+            .background(side == "home" ? homeColor : awayColor)
+            
+            Button("-") {
+                    handleScore(action: "-", side: side)
+            }
+            .frame(width: 100, height: 100)
+            .font(.system(size: 50))
+            .disabled(!isGameInProgress)
+            .background(side == "home" ? homeColor : awayColor)
         }
-        .font(.system(size: 50))
-        .disabled(!isGameInProgress)
-        Button("-") {
-                handleScore(action: "-", side: side)
-        }
-        .font(.system(size: 50))
-        .disabled(!isGameInProgress)
     }
 }
 

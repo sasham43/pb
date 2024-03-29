@@ -10,10 +10,13 @@ import SwiftUI
 struct ServeIndicator : View {
     @State var filled : Bool
     
+    
+    let yellowColor = Color(red: 255 / 255, green: 191 / 255, blue: 70 / 255)
+    
     var body : some View {
         Circle()
-            .fill(filled ? .blue : .clear)
-            .stroke(.blue, lineWidth: 1)
+            .fill(filled ? yellowColor : .clear)
+            .stroke(yellowColor, lineWidth: 1)
 //                                .border(.white, width: )
             .frame(width: 10, height: 10)
     }
