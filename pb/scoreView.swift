@@ -102,9 +102,7 @@ struct scoreView: View {
                 VStack {
                     HStack(spacing: 50) {
                         VStack {
-                            Text("\(scoreData.homeScore)")
-                                .font(.system(size: 70))
-                            Text("Home")
+                            Score(side: "Home", score: $scoreData.homeScore)
                             Button("+") {
                                 handleScore(action: "+", side: "home")
                             }
@@ -120,9 +118,7 @@ struct scoreView: View {
                         }
                         
                         VStack {
-                            Text("\(scoreData.awayScore)")
-                                .font(.system(size: 70))
-                            Text("Away")
+                            Score(side: "Away", score: $scoreData.awayScore)
                             Button("+") {
                                 handleScore(action: "+", side: "away")
                             }
@@ -224,6 +220,17 @@ struct AwayServeIndicators: View {
             ServeIndicator(filled: false)
             ServeIndicator(filled: false)
         }
+    }
+}
+
+struct Score: View {
+    @State var side: String
+    @Binding var score: Int
+    
+    var body: some View {
+        Text("\(score)")
+            .font(.system(size: 70))
+        Text("\(side)")
     }
 }
 
