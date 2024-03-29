@@ -24,6 +24,20 @@ struct scoreView: View {
         isGameInProgress = true
     }
     
+    func checkIfGameOver(){
+        if(homeScore >= 11 && homeScore - awayScore >= 2) {
+            print("Home wins")
+            status = "Home wins"
+            isGameInProgress = false
+        }
+        if(awayScore >= 11 && awayScore - homeScore >= 2) {
+            print("Away wins")
+            status = "Away wins"
+            isGameInProgress = false
+        }
+//        print("game checked")
+    }
+    
     var body: some View {
         VStack {
             Text("Score")
@@ -113,19 +127,8 @@ struct scoreView: View {
                 }
                 
             }
-            .onChange(of: homeScore) {
-                if(homeScore >= 11 && homeScore - awayScore >= 2) {
-                    print("Home wins")
-                    status = "Home wins"
-                    isGameInProgress = false
-                }
-            }
-            .onChange(of: awayScore) {
-                if(awayScore >= 11 && awayScore - homeScore >= 2) {
-                    print("Away wins")
-                    status = "Away wins"
-                    isGameInProgress = false
-                }
+            .onChange(of: [homeScore, awayScore]) {
+                checkIfGameOver()
             }
             Spacer()
         }
