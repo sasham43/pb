@@ -15,7 +15,7 @@ struct controlsView: View {
     
 //    @EnvironmentObject public var homeScore : Int = 0
     @EnvironmentObject var scoreData : ScoreData
-    @State private var awayScore : Int = 0
+//    @State private var awayScore : Int = 0
 //    @State private var status : String = ""
     @State private var serve : Int = 1
     @State private var isGameInProgress : Bool = true
@@ -59,7 +59,7 @@ struct controlsView: View {
                             .stroke(.blue, lineWidth: 1)
                             .frame(width: 10, height: 10)
                     }
-                    Text("Away: \(awayScore)")
+                    Text("Away: \(scoreData.awayScore)")
                     Button("+") {
                         print("+")
                     }

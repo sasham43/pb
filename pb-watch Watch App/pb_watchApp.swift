@@ -11,6 +11,7 @@ class ScoreData: ObservableObject {
     static let shared = ScoreData()
     
     @Published var homeScore: Int = 0
+    @Published var awayScore: Int = 0
 }
 
 @main

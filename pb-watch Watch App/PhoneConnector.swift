@@ -88,6 +88,15 @@ extension PhoneConnector {
         } else {
             print("could not unpack value")
         }
+        if let awayScore = info["away"] as? Int {
+            DispatchQueue.main.async {
+                self.scoreData.awayScore = awayScore
+            }
+//            scoreData.homeScore = homeScore
+            print("away score received: \(awayScore)")
+        } else {
+            print("could not unpack value")
+        }
 //        scoreData.homeScore = info["home"] ?? 0
     }
     
