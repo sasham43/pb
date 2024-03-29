@@ -9,7 +9,12 @@ import Foundation
 import WatchConnectivity
 import SwiftUI
 
+
 class PhoneConnector:NSObject,ObservableObject {
+    
+//    @EnvironmentObject var scoreData : ScoreData
+//    var scoreData =  ScoreData()
+    let scoreData = ScoreData.shared
     
     // public variables
     
@@ -74,6 +79,16 @@ extension PhoneConnector {
 //            self.users.append(user)
 //        }
         print("Received from phone: \(info)")
+        if let homeScore = info["home"] as? Int {
+            DispatchQueue.main.async {
+                self.scoreData.homeScore = homeScore
+            }
+//            scoreData.homeScore = homeScore
+            print("home score received: \(homeScore)")
+        } else {
+            print("could not unpack value")
+        }
+//        scoreData.homeScore = info["home"] ?? 0
     }
     
 }

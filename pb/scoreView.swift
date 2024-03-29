@@ -51,13 +51,14 @@ struct scoreView: View {
                             Text("Home")
                             Button("+") {
                                 homeScore += 1
-                                WatchConnector.shared.sendDataToWatch(["phone home" : "+"])
+                                WatchConnector.shared.sendDataToWatch(["home" : homeScore])
                             }
                             .font(.system(size: 50))
                             .disabled(!isGameInProgress)
                             Button("-") {
                                 if(homeScore != 0){
                                     homeScore -= 1
+                                    WatchConnector.shared.sendDataToWatch(["home" : homeScore])
                                 }
                             }
                             .font(.system(size: 50))
@@ -80,12 +81,14 @@ struct scoreView: View {
                             Text("Away")
                             Button("+") {
                                 awayScore += 1
+                                WatchConnector.shared.sendDataToWatch(["away" : awayScore])
                             }
                             .font(.system(size: 50))
                             .disabled(!isGameInProgress)
                             Button("-") {
                                 if(awayScore != 0){
                                     awayScore -= 1
+                                    WatchConnector.shared.sendDataToWatch(["away" : awayScore])
                                 }
                             }
                             .font(.system(size: 50))

@@ -7,9 +7,18 @@
 
 import SwiftUI
 
+//class ScoreData: ObservableObject {
+//    @Published var homeScore: Int = 0
+//}
+
 struct controlsView: View {
     
-//    func sendMessage(
+//    @EnvironmentObject public var homeScore : Int = 0
+    @EnvironmentObject var scoreData : ScoreData
+    @State private var awayScore : Int = 0
+//    @State private var status : String = ""
+    @State private var serve : Int = 1
+    @State private var isGameInProgress : Bool = true
     
     @State private var isShowingAlert : Bool = false
     
@@ -28,7 +37,7 @@ struct controlsView: View {
                             .stroke(.blue, lineWidth: 1)
                             .frame(width: 10, height: 10)
                     }
-                    Text("Home: 0")
+                    Text("Home: \(scoreData.homeScore)")
                     Button("+") {
                         print("watch +")
                         PhoneConnector.shared.sendDataToPhone(["watch home" : "+"])
@@ -50,7 +59,7 @@ struct controlsView: View {
                             .stroke(.blue, lineWidth: 1)
                             .frame(width: 10, height: 10)
                     }
-                    Text("Away: 0")
+                    Text("Away: \(awayScore)")
                     Button("+") {
                         print("+")
                     }
