@@ -10,13 +10,12 @@ import SwiftUI
 struct scoreView: View {
     
     @EnvironmentObject var scoreData : ScoreData
-//    @State private var homeScore : Int = 0
-//    @State private var awayScore : Int = 0
-    @State private var status : String = ""
-//    @State private var serve : Int = 1
-    @State private var isGameInProgress : Bool = true
-    @State private var isShowingAlert : Bool = false
+    
+    @State private var status: String = ""
+    @State private var isGameInProgress: Bool = true
+    @State private var isShowingAlert: Bool = false
     @State private var pickleScore: String = "0-0-2"
+    @State private var isFirstServe: Bool = true
     
     func resetGame(){
         scoreData.homeScore = 0
@@ -24,10 +23,13 @@ struct scoreView: View {
         status = ""
         scoreData.serve = 1
         isGameInProgress = true
+        isFirstServe = true
     }
     
     func updatePickleScore(){
-        if(scoreData.serve < 2){
+        if(isFirstServe == true){
+            pickleScore = "\(scoreData.homeScore)-\(scoreData.awayScore)-Start"
+        } else if(scoreData.serve < 2){
             // home serving
             let serveNum = scoreData.serve +  1
             pickleScore = "\(scoreData.homeScore)-\(scoreData.awayScore)-\(serveNum)"
@@ -59,6 +61,29 @@ struct scoreView: View {
             scoreData.serve = 0
         }
         WatchConnector.shared.sendDataToWatch(["serve" : scoreData.serve])
+        
+        if(isFirstServe == true && scoreData.serve > 1){
+            isFirstServe = false
+        }
+    }
+    
+    func handleScore(action: String, side: String){
+        if(action == "+" && side == "home"){
+            scoreData.homeScore += 1
+        } else if (action == "+" && side == "away"){
+            scoreData.awayScore += 1
+        } else if (action == "-" && side == "home"){
+            if(scoreData.homeScore != 0){
+                scoreData.homeScore -= 1
+            }
+        } else if (action == "-" && side == "away"){
+            if(scoreData.awayScore != 0){
+                scoreData.awayScore -= 1
+            }
+        }
+//        if(isFirstServe == true){
+//            isFirstServe = false
+//        }
     }
     
     var body: some View {
@@ -134,12 +159,6 @@ struct scoreView: View {
                     VStack {
                         Button("Next serve") {
                             handleServe()
-//                            if (scoreData.serve != 3){
-//                                scoreData.serve += 1
-//                            } else {
-//                                scoreData.serve = 0
-//                            }
-//                            WatchConnector.shared.sendDataToWatch(["serve" : scoreData.serve])
                         }
                     }
                     
@@ -185,6 +204,8 @@ struct scoreView: View {
             print("A wild phone appeared!")
             // TODO: Figure out the correct way to initialize these connectors
             WatchConnector.shared.sendDataToWatch(["Handshake" : ""])
+            
+            updatePickleScore()
         }
     }
 }
