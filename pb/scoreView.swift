@@ -28,43 +28,70 @@ struct scoreView: View {
             Text("Score")
             Text("\(status)")
             GeometryReader { geometry in
-                HStack {
-                    VStack {
-                        Text("\(homeScore)")
-                            .font(.system(size: 36))
-                        Text("Home")
-                        Button("+") {
-                            homeScore += 1
-                            WatchConnector.shared.sendDataToWatch(["phone home" : "+"])
-                        }
-                        .disabled(!isGameInProgress)
-                        Button("-") {
-                            if(homeScore != 0){
-                                homeScore -= 1
+                VStack {
+                    HStack(spacing: 50) {
+                        VStack {
+                            Text("\(homeScore)")
+                                .font(.system(size: 70))
+                            Text("Home")
+                            Button("+") {
+                                homeScore += 1
+                                WatchConnector.shared.sendDataToWatch(["phone home" : "+"])
+                            }
+                            .font(.system(size: 50))
+                            .disabled(!isGameInProgress)
+                            Button("-") {
+                                if(homeScore != 0){
+                                    homeScore -= 1
+                                }
+                            }
+                            .font(.system(size: 50))
+                            .disabled(!isGameInProgress)
+                            if(serve == 0){
+                                ServeIndicator(filled: true)
+                                ServeIndicator(filled: false)
+                            } else if(serve == 1){
+                                ServeIndicator(filled: true)
+                                ServeIndicator(filled: true)
+                            } else {
+                                ServeIndicator(filled: false)
+                                ServeIndicator(filled: false)
                             }
                         }
-                        .disabled(!isGameInProgress)
-                        if(serve == 0){
-                            ServeIndicator(filled: true)
-                            ServeIndicator(filled: false)
-                        } else if(serve == 1){
-                            ServeIndicator(filled: true)
-                            ServeIndicator(filled: true)
-                        } else {
-                            ServeIndicator(filled: false)
-                            ServeIndicator(filled: false)
+                        
+                        VStack {
+                            Text("\(awayScore)")
+                                .font(.system(size: 70))
+                            Text("Away")
+                            Button("+") {
+                                awayScore += 1
+                            }
+                            .font(.system(size: 50))
+                            .disabled(!isGameInProgress)
+                            Button("-") {
+                                if(awayScore != 0){
+                                    awayScore -= 1
+                                }
+                            }
+                            .font(.system(size: 50))
+                            .disabled(!isGameInProgress)
+                            if(serve == 2){
+                                ServeIndicator(filled: true)
+                                ServeIndicator(filled: false)
+                            } else if (serve == 3){
+                                ServeIndicator(filled: true)
+                                ServeIndicator(filled: true)
+                            } else {
+                                ServeIndicator(filled: false)
+                                ServeIndicator(filled: false)
+                            }
                         }
                     }
-                    .padding(10)
-                    
-                    VStack {   
+                    .frame(minWidth: geometry.size.width)
+                    Spacer()
+                    VStack {
                         Button("Reset") {
                             resetGame()
-//                            homeScore = 0
-//                            awayScore = 0
-//                            status = ""
-//                            serve = 1
-//                            isGameInProgress = true
                         }
                         Button("Next serve") {
                             if (serve != 3){
@@ -74,34 +101,9 @@ struct scoreView: View {
                             }
                         }
                     }
-                    
-                    VStack {
-                        Text("\(awayScore)")
-                            .font(.system(size: 36))
-                        Text("Away")
-                        Button("+") {
-                            awayScore += 1
-                        }
-                        .disabled(!isGameInProgress)
-                        Button("-") {
-                            if(awayScore != 0){
-                                awayScore -= 1
-                            }
-                        }
-                        .disabled(!isGameInProgress)
-                        if(serve == 2){
-                            ServeIndicator(filled: true)
-                            ServeIndicator(filled: false)
-                        } else if (serve == 3){
-                            ServeIndicator(filled: true)
-                            ServeIndicator(filled: true)
-                        } else {
-                            ServeIndicator(filled: false)
-                            ServeIndicator(filled: false)
-                        }
-                    }
+                    Spacer()
                 }
-                .frame(minWidth: geometry.size.width)
+                
             }
             .onChange(of: homeScore) {
                 if(homeScore >= 11 && homeScore - awayScore >= 2) {

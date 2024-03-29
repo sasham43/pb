@@ -32,11 +32,12 @@ struct controlsView: View {
                     Button("+") {
                         print("watch +")
                         PhoneConnector.shared.sendDataToPhone(["watch home" : "+"])
-                        
                     }
+                    .font(.system(size: 32))
                     Button("-") {
                         print("-")
                     }
+                    .font(.system(size: 32))
                 }
                 VStack {
                     HStack {
@@ -53,9 +54,11 @@ struct controlsView: View {
                     Button("+") {
                         print("+")
                     }
+                    .font(.system(size: 32))
                     Button("-") {
                         print("-")
                     }
+                    .font(.system(size: 32))
                 }
             }
             
