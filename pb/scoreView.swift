@@ -22,7 +22,8 @@ struct scoreView: View {
     @State private var showConfetti = 0
     
 //    let purpleColor = Color(red: 100 / 250, green: 49 / 250, blue: 97 / 250)
-    let backgroundColor = Color(red: 74 / 255, green: 74 / 255, blue: 74 / 255)
+//    let backgroundColor = Color(red: 74 / 255, green: 74 / 255, blue: 74 / 255)
+    let backgroundColor = Color(red: 24 / 255, green: 24 / 255, blue: 24 / 255)
     let foregroundColor = Color.white
     let homeColor = Color(red: 41 / 255, green: 77 / 255, blue: 74 / 255)
     let awayColor = Color(red: 100 / 255, green: 49 / 255, blue: 97 / 255)
@@ -88,7 +89,7 @@ struct scoreView: View {
 //            Text("Score")
             Text("\(status)")
                 .frame(height: 50)
-                .confettiCannon(counter: $showConfetti, num: 100, openingAngle: Angle.degrees(180), closingAngle: Angle.degrees(0))
+                .confettiCannon(counter: $showConfetti, num: 100, colors: scoreData.serve > 1 ? [awayColor, .white] : [homeColor, .white], openingAngle: Angle.degrees(180), closingAngle: Angle.degrees(0))
             GeometryReader { geometry in
                 VStack {
                     // Scores
