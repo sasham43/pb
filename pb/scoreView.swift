@@ -16,6 +16,7 @@ struct scoreView: View {
 //    @State private var serve : Int = 1
     @State private var isGameInProgress : Bool = true
     @State private var isShowingAlert : Bool = false
+    @State private var pickleScore: String = "0-0-2"
     
     func resetGame(){
         scoreData.homeScore = 0
@@ -23,6 +24,18 @@ struct scoreView: View {
         status = ""
         scoreData.serve = 1
         isGameInProgress = true
+    }
+    
+    func updatePickleScore(){
+        if(scoreData.serve < 2){
+            // home serving
+            var serveNum = scoreData.serve +  1
+            pickleScore = "\(scoreData.homeScore)-\(scoreData.awayScore)-\(serveNum)"
+        } else {
+            // away serving
+            var serveNum = scoreData.serve == 2 ? 1 : 2
+            pickleScore = "\(scoreData.awayScore)-\(scoreData.homeScore)-\(serveNum)"
+        }
     }
     
     func checkIfGameOver(){
@@ -108,6 +121,19 @@ struct scoreView: View {
                     }
                     .frame(minWidth: geometry.size.width)
                     Spacer()
+                    
+                    
+                    // Pickle score
+                    VStack {
+                        Text("Pickle Score")
+                            .font(.system(size: 22))
+                            .padding(4)
+                        Text("\(pickleScore)")
+                            .font(.system(size: 42))
+                    }
+                    
+                    Spacer()
+                    
                     VStack {
                         Button("Reset") {
 //                            resetGame()
@@ -133,8 +159,9 @@ struct scoreView: View {
                 }
                 
             }
-            .onChange(of: [scoreData.homeScore, scoreData.awayScore]) {
+            .onChange(of: [scoreData.homeScore, scoreData.awayScore, scoreData.serve]) {
                 checkIfGameOver()
+                updatePickleScore()
             }
             Spacer()
         }
