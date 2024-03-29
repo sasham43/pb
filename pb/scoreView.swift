@@ -68,6 +68,7 @@ struct scoreView: View {
     }
     
     func handleScore(action: String, side: String){
+        // elegance personified
         if(action == "+" && side == "home"){
             scoreData.homeScore += 1
         } else if (action == "+" && side == "away"){
