@@ -29,11 +29,11 @@ struct scoreView: View {
     func updatePickleScore(){
         if(scoreData.serve < 2){
             // home serving
-            var serveNum = scoreData.serve +  1
+            let serveNum = scoreData.serve +  1
             pickleScore = "\(scoreData.homeScore)-\(scoreData.awayScore)-\(serveNum)"
         } else {
             // away serving
-            var serveNum = scoreData.serve == 2 ? 1 : 2
+            let serveNum = scoreData.serve == 2 ? 1 : 2
             pickleScore = "\(scoreData.awayScore)-\(scoreData.homeScore)-\(serveNum)"
         }
     }
@@ -50,6 +50,15 @@ struct scoreView: View {
             isGameInProgress = false
         }
 //        print("game checked")
+    }
+    
+    func handleServe(){
+        if (scoreData.serve != 3){
+            scoreData.serve += 1
+        } else {
+            scoreData.serve = 0
+        }
+        WatchConnector.shared.sendDataToWatch(["serve" : scoreData.serve])
     }
     
     var body: some View {
@@ -122,6 +131,20 @@ struct scoreView: View {
                     .frame(minWidth: geometry.size.width)
                     Spacer()
                     
+                    VStack {
+                        Button("Next serve") {
+                            handleServe()
+//                            if (scoreData.serve != 3){
+//                                scoreData.serve += 1
+//                            } else {
+//                                scoreData.serve = 0
+//                            }
+//                            WatchConnector.shared.sendDataToWatch(["serve" : scoreData.serve])
+                        }
+                    }
+                    
+                    Spacer()
+                    
                     
                     // Pickle score
                     VStack {
@@ -145,15 +168,7 @@ struct scoreView: View {
                             }
                             Button("No", role: .cancel){}
                         }
-                        .padding(20)
-                        Button("Next serve") {
-                            if (scoreData.serve != 3){
-                                scoreData.serve += 1
-                            } else {
-                                scoreData.serve = 0
-                            }
-                            WatchConnector.shared.sendDataToWatch(["serve" : scoreData.serve])
-                        }
+//                        .padding(20)
                     }
                     Spacer()
                 }
