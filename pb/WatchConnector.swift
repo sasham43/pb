@@ -10,6 +10,7 @@ import WatchConnectivity
 
 class WatchConnector: NSObject, ObservableObject {
     // public variables
+    let scoreData = ScoreData.shared
     
     static let shared = WatchConnector()
     
@@ -60,5 +61,20 @@ extension WatchConnector {
 extension WatchConnector {
     public func dataReceivedFromWatch(_ info: [String : Any]){
         print("Watch data: \(info)")
+        
+        if let homeScore = info["home"] as? Int {
+            DispatchQueue.main.async {
+                self.scoreData.homeScore = homeScore
+            }
+//            scoreData.homeScore = homeScore
+            print("home score received: \(homeScore)")
+        }
+        if let awayScore = info["away"] as? Int {
+            DispatchQueue.main.async {
+                self.scoreData.awayScore = awayScore
+            }
+//            scoreData.homeScore = homeScore
+            print("away score received: \(awayScore)")
+        }
     }
 }

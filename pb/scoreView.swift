@@ -9,28 +9,29 @@ import SwiftUI
 
 struct scoreView: View {
     
-    @State private var homeScore : Int = 0
-    @State private var awayScore : Int = 0
+    @EnvironmentObject var scoreData : ScoreData
+//    @State private var homeScore : Int = 0
+//    @State private var awayScore : Int = 0
     @State private var status : String = ""
     @State private var serve : Int = 1
     @State private var isGameInProgress : Bool = true
     @State private var isShowingAlert : Bool = false
     
     func resetGame(){
-        homeScore = 0
-        awayScore = 0
+        scoreData.homeScore = 0
+        scoreData.awayScore = 0
         status = ""
         serve = 1
         isGameInProgress = true
     }
     
     func checkIfGameOver(){
-        if(homeScore >= 11 && homeScore - awayScore >= 2) {
+        if(scoreData.homeScore >= 11 && scoreData.homeScore - scoreData.awayScore >= 2) {
             print("Home wins")
             status = "Home wins"
             isGameInProgress = false
         }
-        if(awayScore >= 11 && awayScore - homeScore >= 2) {
+        if(scoreData.awayScore >= 11 && scoreData.awayScore - scoreData.homeScore >= 2) {
             print("Away wins")
             status = "Away wins"
             isGameInProgress = false
@@ -46,19 +47,19 @@ struct scoreView: View {
                 VStack {
                     HStack(spacing: 50) {
                         VStack {
-                            Text("\(homeScore)")
+                            Text("\(scoreData.homeScore)")
                                 .font(.system(size: 70))
                             Text("Home")
                             Button("+") {
-                                homeScore += 1
-                                WatchConnector.shared.sendDataToWatch(["home" : homeScore])
+                                scoreData.homeScore += 1
+                                WatchConnector.shared.sendDataToWatch(["home" : scoreData.homeScore])
                             }
                             .font(.system(size: 50))
                             .disabled(!isGameInProgress)
                             Button("-") {
-                                if(homeScore != 0){
-                                    homeScore -= 1
-                                    WatchConnector.shared.sendDataToWatch(["home" : homeScore])
+                                if(scoreData.homeScore != 0){
+                                    scoreData.homeScore -= 1
+                                    WatchConnector.shared.sendDataToWatch(["home" : scoreData.homeScore])
                                 }
                             }
                             .font(.system(size: 50))
@@ -76,19 +77,19 @@ struct scoreView: View {
                         }
                         
                         VStack {
-                            Text("\(awayScore)")
+                            Text("\(scoreData.awayScore)")
                                 .font(.system(size: 70))
                             Text("Away")
                             Button("+") {
-                                awayScore += 1
-                                WatchConnector.shared.sendDataToWatch(["away" : awayScore])
+                                scoreData.awayScore += 1
+                                WatchConnector.shared.sendDataToWatch(["away" : scoreData.awayScore])
                             }
                             .font(.system(size: 50))
                             .disabled(!isGameInProgress)
                             Button("-") {
-                                if(awayScore != 0){
-                                    awayScore -= 1
-                                    WatchConnector.shared.sendDataToWatch(["away" : awayScore])
+                                if(scoreData.awayScore != 0){
+                                    scoreData.awayScore -= 1
+                                    WatchConnector.shared.sendDataToWatch(["away" : scoreData.awayScore])
                                 }
                             }
                             .font(.system(size: 50))
@@ -130,7 +131,7 @@ struct scoreView: View {
                 }
                 
             }
-            .onChange(of: [homeScore, awayScore]) {
+            .onChange(of: [scoreData.homeScore, scoreData.awayScore]) {
                 checkIfGameOver()
             }
             Spacer()

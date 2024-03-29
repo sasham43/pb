@@ -40,11 +40,12 @@ struct controlsView: View {
                     Text("Home: \(scoreData.homeScore)")
                     Button("+") {
                         print("watch +")
-                        PhoneConnector.shared.sendDataToPhone(["watch home" : "+"])
+                        PhoneConnector.shared.sendDataToPhone(["home" : scoreData.homeScore])
                     }
                     .font(.system(size: 32))
                     Button("-") {
                         print("-")
+                        PhoneConnector.shared.sendDataToPhone(["home" : scoreData.homeScore])
                     }
                     .font(.system(size: 32))
                 }
@@ -62,10 +63,12 @@ struct controlsView: View {
                     Text("Away: \(scoreData.awayScore)")
                     Button("+") {
                         print("+")
+                        PhoneConnector.shared.sendDataToPhone(["away" : scoreData.awayScore])
                     }
                     .font(.system(size: 32))
                     Button("-") {
                         print("-")
+                        PhoneConnector.shared.sendDataToPhone(["away" : scoreData.awayScore])
                     }
                     .font(.system(size: 32))
                 }
