@@ -134,7 +134,7 @@ struct scoreView: View {
                     
                     // Serve button
                     HStack {
-                        Spacer()
+//                        Spacer()
                         HomeServeIndicators(serve: $scoreData.serve)
                         Spacer()
                         VStack {
@@ -144,12 +144,14 @@ struct scoreView: View {
                             .frame(width: 100, height: 50)
                             .background(yellowColor)
                             .foregroundColor(.black)
+                            .clipShape(RoundedRectangle(cornerRadius: 8))
                         }
                         Spacer()
                         AwayServeIndicators(serve: $scoreData.serve)
-                        Spacer()
+//                        Spacer()
                     }
                     .frame(height: 50)
+                    .padding(15)
 //                    .background(yellowColor)
 //                    .foregroundColor(.black)
                     
@@ -175,6 +177,7 @@ struct scoreView: View {
                         }
                         .frame(width: 100, height: 50)
                         .background(redColor)
+                        .clipShape(RoundedRectangle(cornerRadius: 8))
                         .alert("Are you sure you want to reset the game?", isPresented: $isShowingAlert){
                             Button("Yes"){
                                 resetGame()
@@ -289,10 +292,10 @@ struct ScoreButtons: View {
             }
             .frame(minWidth: 60, maxWidth: 100)
             .frame(height: 100)
-//            .frame(width: 100, height: 100)
             .font(.system(size: 50))
             .disabled(!isGameInProgress)
             .background(side == "home" ? homeColor : awayColor)
+            .clipShape(RoundedRectangle(cornerRadius: 8))
             
             Button("-") {
                     handleScore(action: "-", side: side)
@@ -303,6 +306,7 @@ struct ScoreButtons: View {
             .font(.system(size: 50))
             .disabled(!isGameInProgress)
             .background(side == "home" ? homeColor : awayColor)
+            .clipShape(RoundedRectangle(cornerRadius: 8))
         }
     }
 }
@@ -360,15 +364,76 @@ struct PickleScore: View {
     
     var body: some View {
         if(scoreData.serve == 0 || scoreData.serve == 1){
-            Text("\(homeScoreText)-\(awayScoreText)-\(serveText)")
-                .font(.system(size: 42))
+//            Text("\(homeScoreText)-\(awayScoreText)-\(serveText)")
+//                .font(.system(size: 42))
+//            HStack {
+//                ScoreCard(score: $homeScoreText)
+//                Text("-")
+//                ScoreCard(score: awayScoreText)
+//                Text("-")
+//                ScoreCard(score: serveText)
+//            }
+//            .font(.system(size: 42))
+            HStack {
+                ZStack {
+                    Text(homeScoreText)
+                }
+                .clipShape(RoundedRectangle(cornerRadius: 8))
+                Text("-")
+                ZStack {
+                    Text(awayScoreText)
+                }
+                .clipShape(RoundedRectangle(cornerRadius: 8))
+                Text("-")
+                ZStack {
+                    Text(serveText)
+                }
+                .clipShape(RoundedRectangle(cornerRadius: 8))
+            }.font(.system(size: 42))
         } else if (scoreData.serve == 2 || scoreData.serve == 3) {
-            Text("\(awayScoreText)-\(homeScoreText)-\(serveText)")
-                .font(.system(size: 42))
+            HStack {
+                ZStack {
+                    Text(awayScoreText)
+                }
+                .clipShape(RoundedRectangle(cornerRadius: 8))
+                Text("-")
+                ZStack {
+                    Text(homeScoreText)
+                }
+                .clipShape(RoundedRectangle(cornerRadius: 8))
+                Text("-")
+                ZStack {
+                    Text(serveText)
+                }
+                .clipShape(RoundedRectangle(cornerRadius: 8))
+            }.font(.system(size: 42))
+//            Text("\(awayScoreText)-\(homeScoreText)-\(serveText)")
+//                .font(.system(size: 42))
+//            HStack {
+//                
+//                    ScoreCard(score: awayScoreText)
+//                    Text("-")
+//                    ScoreCard(score: homeScoreText)
+//                    Text("-")
+//                    ScoreCard(score: serveText)
+//            }
         }
         
     }
 }
+
+//struct ScoreCard: View {
+//    @Binding var score: AttributedString
+//    
+//    
+//    var body: some View {
+//        ZStack {
+//            Text(score)
+//                .font(.system(size: 42))
+//        }
+//        .clipShape(RoundedRectangle(cornerRadius: 8))
+//    }
+//}
 
 #Preview {
     scoreView()
