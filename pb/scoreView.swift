@@ -86,10 +86,16 @@ struct scoreView: View {
     
     var body: some View {
         VStack {
-//            Text("Score")
-            Text("\(status)")
-                .frame(height: 50)
-                .confettiCannon(counter: $showConfetti, num: 100, colors: scoreData.serve > 1 ? [awayColor, .white] : [homeColor, .white], openingAngle: Angle.degrees(180), closingAngle: Angle.degrees(0))
+            if(scoreData.serve > 1){
+                Text("\(status)")
+                    .frame(height: 50)
+                    .confettiCannon(counter: $showConfetti, num: 100, colors:  [awayColor, .white], openingAngle: Angle.degrees(180), closingAngle: Angle.degrees(0))
+            } else {
+                Text("\(status)")
+                    .frame(height: 50)
+                    .confettiCannon(counter: $showConfetti, num: 100, colors: [homeColor, .white], openingAngle: Angle.degrees(180), closingAngle: Angle.degrees(0))
+            }
+            
             GeometryReader { geometry in
                 VStack {
                     // Scores
