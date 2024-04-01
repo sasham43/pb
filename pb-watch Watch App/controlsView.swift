@@ -7,9 +7,6 @@
 
 import SwiftUI
 
-//class ScoreData: ObservableObject {
-//    @Published var homeScore: Int = 0
-//}
 
 struct controlsView: View {
     
@@ -22,20 +19,21 @@ struct controlsView: View {
     
     @State private var isShowingAlert : Bool = false
     
+    // style
+    let backgroundColor = Color(red: 24 / 255, green: 24 / 255, blue: 24 / 255)
+    let foregroundColor = Color.white
+    let homeColor = Color(red: 41 / 255, green: 77 / 255, blue: 74 / 255)
+    let awayColor = Color(red: 100 / 255, green: 49 / 255, blue: 97 / 255)
+    let redColor = Color(red: 142 / 255, green: 62 / 255, blue: 62 / 255)
+    let yellowColor = Color(red: 255 / 255, green: 191 / 255, blue: 70 / 255)
+    
+
     
     var body: some View {
         VStack {
             HStack {
                 VStack {
                     HStack {
-//                        Circle()
-//                            .fill(.blue)
-//                            .stroke(.blue, lineWidth: 1)
-//                            .frame(width: 10, height: 10)
-//                        Circle()
-//                            .fill(.clear)
-//                            .stroke(.blue, lineWidth: 1)
-//                            .frame(width: 10, height: 10)
                         if(scoreData.serve == 0){
                             ServeIndicator(filled: true)
                             ServeIndicator(filled: false)
@@ -53,7 +51,16 @@ struct controlsView: View {
                         scoreData.homeScore += 1
                         PhoneConnector.shared.sendDataToPhone(["home" : scoreData.homeScore])
                     }
+                    .buttonStyle(PlainButtonStyle())
+                    .padding(8)
+                    .frame(minWidth: 95)
                     .font(.system(size: 32))
+                    .background(homeColor)
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                    
+//                    .tint(homeColor)
+//                    .buttonStyle(Bor)
+                    
                     Button("-") {
                         print("-")
                         if(scoreData.homeScore != 0){
@@ -62,7 +69,12 @@ struct controlsView: View {
                         }
                         
                     }
+                    .buttonStyle(PlainButtonStyle())
+                    .padding(8)
+                    .frame(minWidth: 95)
                     .font(.system(size: 32))
+                    .background(homeColor)
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
                 }
                 VStack {
                     HStack {
@@ -83,7 +95,13 @@ struct controlsView: View {
                         scoreData.awayScore += 1
                         PhoneConnector.shared.sendDataToPhone(["away" : scoreData.awayScore])
                     }
+                    .buttonStyle(PlainButtonStyle())
+                    .padding(8)
+                    .frame(minWidth: 95)
                     .font(.system(size: 32))
+                    .background(awayColor)
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                    
                     Button("-") {
                         print("-")
                         if(scoreData.awayScore != 0){
@@ -91,7 +109,12 @@ struct controlsView: View {
                             PhoneConnector.shared.sendDataToPhone(["away" : scoreData.awayScore])
                         }
                     }
+                    .buttonStyle(PlainButtonStyle())
+                    .padding(8)
+                    .frame(minWidth: 95)
                     .font(.system(size: 32))
+                    .background(awayColor)
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
                 }
             }
             
@@ -102,12 +125,19 @@ struct controlsView: View {
                         print("Reset?")
                         isShowingAlert = true
                     }
+                    .buttonStyle(PlainButtonStyle())
+                    .padding(8)
+                    .frame(minWidth: 95)
+//                    .font(.system(size: 32))
+                    .background(redColor)
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
                     .alert("Are you sure you want to reset the game?", isPresented: $isShowingAlert){
                         Button("Yes"){
                             print("Reset!!")
                         }
                         Button("No", role: .cancel){}
                     }
+                    
                     Button("Serve") {
                         if (scoreData.serve != 3){
                             scoreData.serve += 1
@@ -117,6 +147,12 @@ struct controlsView: View {
                         PhoneConnector.shared.sendDataToPhone(["serve": scoreData.serve])
                         print("next serve")
                     }
+                    .buttonStyle(PlainButtonStyle())
+                    .padding(8)
+                    .frame(minWidth: 95)
+//                    .font(.system(size: 32))
+                    .background(yellowColor)
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
                 }
             }
         }
