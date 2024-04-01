@@ -94,39 +94,29 @@ struct scoreView: View {
                 VStack {
                     // Scores
                     HStack(spacing: 5) {
-//                        VStack {
-                            HStack {
-                                Spacer()
-                                VStack {
-                                    ScoreButtons(side: "home", isGameInProgress: $isGameInProgress)
-                                        .environmentObject(scoreData)
-
-//                                    HomeServeIndicators(serve: $scoreData.serve)
-                                }
-                                Spacer()
-                                VStack {
-                                    ScoreDisplay(side: "Home", score: $scoreData.homeScore)
-                                }
+                        HStack {
+                            Spacer()
+                            VStack {
+                                ScoreButtons(side: "home", isGameInProgress: $isGameInProgress)
                             }
-//                        }
+                            Spacer()
+                            VStack {
+                                ScoreDisplay(side: "Home", score: $scoreData.homeScore)
+                            }
+                        }
                         
                         Text("-")
                         
-//                        VStack {
-                            HStack {
-                                VStack {
-                                    ScoreDisplay(side: "Away", score: $scoreData.awayScore)
-                                }
-                                Spacer()
-                                VStack {
-                                    ScoreButtons(side: "away", isGameInProgress: $isGameInProgress)
-                                        .environmentObject(scoreData)
-
-//                                    AwayServeIndicators(serve: $scoreData.serve)
-                                }
-                                Spacer()
+                        HStack {
+                            VStack {
+                                ScoreDisplay(side: "Away", score: $scoreData.awayScore)
                             }
-//                        }
+                            Spacer()
+                            VStack {
+                                ScoreButtons(side: "away", isGameInProgress: $isGameInProgress)
+                            }
+                            Spacer()
+                        }
                     }
                     .frame(minWidth: geometry.size.width)
                     
@@ -134,7 +124,6 @@ struct scoreView: View {
                     
                     // Serve button
                     HStack {
-//                        Spacer()
                         HomeServeIndicators(serve: $scoreData.serve)
                         Spacer()
                         VStack {
@@ -148,12 +137,9 @@ struct scoreView: View {
                         }
                         Spacer()
                         AwayServeIndicators(serve: $scoreData.serve)
-//                        Spacer()
                     }
                     .frame(height: 50)
                     .padding(15)
-//                    .background(yellowColor)
-//                    .foregroundColor(.black)
                     
                     
                     Spacer()
@@ -163,8 +149,6 @@ struct scoreView: View {
                         Text("Pickle Score")
                             .font(.system(size: 22))
                             .padding(4)
-//                        Text("\(pickleScore)")
-//                            .font(.system(size: 42))
                         PickleScore()
                     }
                     
@@ -250,7 +234,6 @@ struct ScoreDisplay: View {
         Text("\(score)")
             .font(.system(size: 70))
             .frame(minWidth: 100)
-//        Text("\(side)")
     }
 }
 
@@ -302,7 +285,6 @@ struct ScoreButtons: View {
             }
             .frame(minWidth: 60, maxWidth: 100)
             .frame(height: 100)
-//            .frame(width: 100, height: 100)
             .font(.system(size: 50))
             .disabled(!isGameInProgress)
             .background(side == "home" ? homeColor : awayColor)
@@ -312,7 +294,6 @@ struct ScoreButtons: View {
 }
 
 struct PickleScore: View {
-//    @State var pickleScore: String
     @EnvironmentObject var scoreData: ScoreData
     
     let homeColor = Color(red: 41 / 255, green: 77 / 255, blue: 74 / 255)
@@ -334,7 +315,6 @@ struct PickleScore: View {
     var serveText: AttributedString {
         var serveNumber = 1
         
-        
         if(scoreData.serve == 0 || scoreData.serve == 2){
             serveNumber = 1
         } else if (scoreData.serve == 1 || scoreData.serve == 3){
@@ -348,32 +328,8 @@ struct PickleScore: View {
         return text
     }
     
-//    func updatePickleScore(){
-//        if(isFirstServe == true){
-//            pickleScore = "\(scoreData.homeScore)-\(scoreData.awayScore)-Start"
-//        } else if(scoreData.serve < 2){
-//            // home serving
-//            let serveNum = scoreData.serve +  1
-//            pickleScore = "\(scoreData.homeScore)-\(scoreData.awayScore)-\(serveNum)"
-//        } else {
-//            // away serving
-//            let serveNum = scoreData.serve == 2 ? 1 : 2
-//            pickleScore = "\(scoreData.awayScore)-\(scoreData.homeScore)-\(serveNum)"
-//        }
-//    }
-    
     var body: some View {
         if(scoreData.serve == 0 || scoreData.serve == 1){
-//            Text("\(homeScoreText)-\(awayScoreText)-\(serveText)")
-//                .font(.system(size: 42))
-//            HStack {
-//                ScoreCard(score: $homeScoreText)
-//                Text("-")
-//                ScoreCard(score: awayScoreText)
-//                Text("-")
-//                ScoreCard(score: serveText)
-//            }
-//            .font(.system(size: 42))
             HStack {
                 ZStack {
                     Text(homeScoreText)
@@ -407,33 +363,10 @@ struct PickleScore: View {
                 }
                 .clipShape(RoundedRectangle(cornerRadius: 8))
             }.font(.system(size: 42))
-//            Text("\(awayScoreText)-\(homeScoreText)-\(serveText)")
-//                .font(.system(size: 42))
-//            HStack {
-//                
-//                    ScoreCard(score: awayScoreText)
-//                    Text("-")
-//                    ScoreCard(score: homeScoreText)
-//                    Text("-")
-//                    ScoreCard(score: serveText)
-//            }
         }
         
     }
 }
-
-//struct ScoreCard: View {
-//    @Binding var score: AttributedString
-//    
-//    
-//    var body: some View {
-//        ZStack {
-//            Text(score)
-//                .font(.system(size: 42))
-//        }
-//        .clipShape(RoundedRectangle(cornerRadius: 8))
-//    }
-//}
 
 #Preview {
     scoreView()
