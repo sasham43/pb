@@ -105,7 +105,7 @@ struct scoreView: View {
                                 }
                                 Spacer()
                                 VStack {
-                                    Score(side: "Home", score: $scoreData.homeScore)
+                                    ScoreDisplay(side: "Home", score: $scoreData.homeScore)
                                 }
                             }
 //                        }
@@ -115,7 +115,7 @@ struct scoreView: View {
 //                        VStack {
                             HStack {
                                 VStack {
-                                    Score(side: "Away", score: $scoreData.awayScore)
+                                    ScoreDisplay(side: "Away", score: $scoreData.awayScore)
                                 }
                                 Spacer()
                                 VStack {
@@ -239,13 +239,14 @@ struct AwayServeIndicators: View {
     }
 }
 
-struct Score: View {
+struct ScoreDisplay: View {
     @State var side: String
     @Binding var score: Int
     
     var body: some View {
         Text("\(score)")
             .font(.system(size: 70))
+            .frame(minWidth: 100)
 //        Text("\(side)")
     }
 }
@@ -286,7 +287,9 @@ struct ScoreButtons: View {
             Button("+") {
                 handleScore(action: "+", side: side)
             }
-            .frame(width: 100, height: 100)
+            .frame(minWidth: 60, maxWidth: 100)
+            .frame(height: 100)
+//            .frame(width: 100, height: 100)
             .font(.system(size: 50))
             .disabled(!isGameInProgress)
             .background(side == "home" ? homeColor : awayColor)
@@ -294,7 +297,9 @@ struct ScoreButtons: View {
             Button("-") {
                     handleScore(action: "-", side: side)
             }
-            .frame(width: 100, height: 100)
+            .frame(minWidth: 60, maxWidth: 100)
+            .frame(height: 100)
+//            .frame(width: 100, height: 100)
             .font(.system(size: 50))
             .disabled(!isGameInProgress)
             .background(side == "home" ? homeColor : awayColor)
